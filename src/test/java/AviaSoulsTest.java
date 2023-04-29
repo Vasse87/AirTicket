@@ -42,9 +42,23 @@ public class AviaSoulsTest {
     }
 
     @Test
+    public void shouldSearchOneTicket() {
+        Ticket[] expected = {ticket1};
+        Ticket[] actual = souls.search("Шерементьево", "Сочи");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSearchTicketsAndShowInRisingPrice() {
         Ticket[] expected = {ticket2, ticket7, ticket6};
         Ticket[] actual = souls.search("Пулково", "Волгоград");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSearchTickets() {
+        Ticket[] expected = {};
+        Ticket[] actual = souls.search("Стамбул", "Сочи");
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -68,9 +82,23 @@ public class AviaSoulsTest {
 
      */
     @Test
-    public void shouldSearchAndSortForMoreTimeFlight() {
+    public void shouldSearchAndSortSeveralTicketsForMoreTimeFlight() {
         Ticket[] expected = {ticket7, ticket6, ticket2};
         Ticket[] actual = souls.searchAndSortBy("Пулково", "Волгоград", timeComparator);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchAndSortOneTicketForMoreTimeFlight() {
+        Ticket[] expected = {ticket4};
+        Ticket[] actual = souls.searchAndSortBy("Воронеж", "Архангельск", timeComparator);
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotSearchAndSortTicket() {
+        Ticket[] expected = {};
+        Ticket[] actual = souls.searchAndSortBy("Стамбул", "Волгоград", timeComparator);
         Assertions.assertArrayEquals(expected, actual);
     }
 
